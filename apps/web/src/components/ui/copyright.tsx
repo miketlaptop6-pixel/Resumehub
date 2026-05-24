@@ -42,7 +42,7 @@ export function Copyright({ className, ...props }: Props) {
 
 			<p className="mt-4">
 				<Trans comment="App version label in footer; includes semantic version variable">
-					Reactive Resume v{__APP_VERSION__}
+					ResumeHub.in v{__APP_VERSION__}
 				</Trans>
 			</p>
 		</div>

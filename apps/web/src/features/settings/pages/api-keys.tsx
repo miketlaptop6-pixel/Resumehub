@@ -84,7 +84,7 @@ export function ApiKeysSettingsPage() {
 
 					<p className="text-muted-foreground leading-relaxed">
 						<Trans>
-							Explore the API documentation to learn how to integrate Reactive Resume with your applications. Find
+							Explore the API documentation to learn how to integrate ResumeHub.in with your applications. Find
 							detailed endpoints, request examples, and authentication methods.
 						</Trans>
 					</p>
@@ -93,7 +93,7 @@ export function ApiKeysSettingsPage() {
 						variant="link"
 						nativeButton={false}
 						render={
-							<a href="https://docs.rxresu.me/api-reference" target="_blank" rel="noopener noreferrer">
+							<a href="https://docs.resumehub.in/api-reference" target="_blank" rel="noopener noreferrer">
 								<LinkSimpleIcon />
 								<Trans>API Reference</Trans>
 							</a>

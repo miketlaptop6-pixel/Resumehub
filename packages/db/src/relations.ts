@@ -18,6 +18,23 @@ export const relations = defineRelations(schema, (r) => ({
 		oauthRefreshTokens: r.many.oauthRefreshToken(),
 		oauthAccessTokens: r.many.oauthAccessToken(),
 		oauthConsents: r.many.oauthConsent(),
+		userPlan: r.one.userPlan({
+			from: r.user.id,
+			to: r.userPlan.userId,
+		}),
+	},
+	plan: {
+		userPlans: r.many.userPlan(),
+	},
+	userPlan: {
+		user: r.one.user({
+			from: r.userPlan.userId,
+			to: r.user.id,
+		}),
+		plan: r.one.plan({
+			from: r.userPlan.planId,
+			to: r.plan.id,
+		}),
 	},
 	session: {
 		user: r.one.user({

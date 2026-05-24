@@ -8,7 +8,8 @@
 		"./page": "./src/page.ts",
 		"./resume/*": "./src/resume/*.ts",
 		"./schema.json": "./schema.json",
-		"./templates": "./src/templates.ts"
+		"./templates": "./src/templates.ts",
+		"./template-tiers": "./src/template-tiers.ts"
 	},
 	"scripts": {
 		"typecheck": "tsgo --noEmit",

@@ -43,14 +43,14 @@ export async function handleOpenApi(request: Request) {
 	if (request.method === "GET" && (request.url.endsWith("/spec.json") || request.url.endsWith("/spec"))) {
 		const spec = await openAPIGenerator.generate(openAPIRouter, {
 			info: {
-				title: "Reactive Resume",
+				title: "ResumeHub.in",
 				version: __APP_VERSION__,
-				description: "Reactive Resume API",
+				description: "ResumeHub.in API",
 				license: { name: "MIT", url: "https://github.com/amruthpillai/reactive-resume/blob/main/LICENSE" },
 				contact: { name: "Amruth Pillai", email: "hello@amruthpillai.com", url: "https://amruthpillai.com" },
 			},
 			servers: [{ url: `${env.APP_URL}/api/openapi` }],
-			externalDocs: { url: "https://docs.rxresu.me", description: "Reactive Resume Documentation" },
+			externalDocs: { url: "https://docs.resumehub.in", description: "ResumeHub.in Documentation" },
 			commonSchemas: {
 				ResumeData: { schema: resumeDataSchema },
 			},

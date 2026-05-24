@@ -6,6 +6,7 @@ import { AISDKError } from "ai";
 import { flattenError, ZodError, z } from "zod";
 import { storedResumeAnalysisSchema } from "@reactive-resume/schema/resume/analysis";
 import { protectedProcedure } from "../../context";
+import { checkAiLimit, incrementAiUsage } from "../../middleware/ai-limits";
 import { aiRequestRateLimit } from "../../middleware/rate-limit";
 import { aiProvidersService } from "../ai-providers/service";
 import { resumeService } from "../resume/service";
@@ -73,15 +74,22 @@ export const aiRouter = {
 			BAD_REQUEST: { message: "The AI returned an improperly formatted structure.", status: 400 },
 		})
 		.handler(async ({ context, input }): Promise<ResumeData> => {
+			// RBAC: Check AI usage limit for free users
+			checkAiLimit(context.user);
+
 			try {
 				const provider = await getRunnableProvider(context.user.id, input.aiProviderId);
-				return await aiService.parsePdf({
+				const result = await aiService.parsePdf({
 					provider: provider.provider,
 					model: provider.model,
 					apiKey: provider.apiKey,
 					baseURL: provider.baseURL ?? "",
 					file: input.file,
 				});
+
+				// Increment usage after successful request
+				incrementAiUsage(context.user);
+				return result;
 			} catch (error) {
 				if (isCredentialEncryptionUnavailable(error)) throwCredentialEncryptionUnavailable();
 				if (isInvalidAiBaseUrlError(error)) throwAiProviderConfigError();
@@ -118,9 +126,12 @@ export const aiRouter = {
 			BAD_REQUEST: { message: "The AI returned an improperly formatted structure.", status: 400 },
 		})
 		.handler(async ({ context, input }) => {
+			// RBAC: Check AI usage limit for free users
+			checkAiLimit(context.user);
+
 			try {
 				const provider = await getRunnableProvider(context.user.id, input.aiProviderId);
-				return await aiService.parseDocx({
+				const result = await aiService.parseDocx({
 					provider: provider.provider,
 					model: provider.model,
 					apiKey: provider.apiKey,
@@ -128,6 +139,9 @@ export const aiRouter = {
 					mediaType: input.mediaType,
 					file: input.file,
 				});
+
+				incrementAiUsage(context.user);
+				return result;
 			} catch (error) {
 				if (isCredentialEncryptionUnavailable(error)) throwCredentialEncryptionUnavailable();
 				if (isInvalidAiBaseUrlError(error)) throwAiProviderConfigError();
@@ -156,13 +170,16 @@ export const aiRouter = {
 		)
 		.use(aiRequestRateLimit)
 		.handler(async ({ context, input }) => {
+			// RBAC: Check AI usage limit for free users
+			checkAiLimit(context.user);
+
 			try {
 				const [provider, resume] = await Promise.all([
 					getRunnableProvider(context.user.id, input.aiProviderId),
 					resumeService.getById({ id: input.resumeId, userId: context.user.id }),
 				]);
 
-				return await aiService.chat({
+				const result = await aiService.chat({
 					provider: provider.provider,
 					model: provider.model,
 					apiKey: provider.apiKey,
@@ -171,6 +188,9 @@ export const aiRouter = {
 					resumeData: resume.data,
 					resumeUpdatedAt: resume.updatedAt,
 				});
+
+				incrementAiUsage(context.user);
+				return result;
 			} catch (error) {
 				if (isCredentialEncryptionUnavailable(error)) throwCredentialEncryptionUnavailable();
 				if (isInvalidAiBaseUrlError(error)) throwAiProviderConfigError();
@@ -203,6 +223,9 @@ export const aiRouter = {
 			BAD_REQUEST: { message: "The AI returned an improperly formatted structure.", status: 400 },
 		})
 		.handler(async ({ context, input }) => {
+			// RBAC: Check AI usage limit for free users
+			checkAiLimit(context.user);
+
 			try {
 				const [provider, resume] = await Promise.all([
 					getRunnableProvider(context.user.id, input.aiProviderId),
@@ -215,6 +238,8 @@ export const aiRouter = {
 					baseURL: provider.baseURL ?? "",
 					resumeData: resume.data,
 				});
+
+				incrementAiUsage(context.user);
 
 				return await resumeService.analysis.upsert({
 					id: input.resumeId,

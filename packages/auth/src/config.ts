@@ -234,7 +234,7 @@ const getAuthConfig = () => {
 	}
 
 	return betterAuth({
-		appName: "Reactive Resume",
+		appName: "ResumeHub.in",
 		baseURL: authBaseUrl,
 		secret: env.AUTH_SECRET,
 
@@ -269,6 +269,21 @@ const getAuthConfig = () => {
 					}
 				}
 			}),
+		},
+
+		databaseHooks: {
+			user: {
+				create: {
+					after: async (user) => {
+						// Auto-promote founder email to admin, otherwise set to "free"
+						const role = user.email?.toLowerCase() === "founder@resumehub.in" ? "admin" : "free";
+						await db
+							.update(schema.user)
+							.set({ role })
+							.where(eq(schema.user.id, user.id));
+					},
+				},
+			},
 		},
 
 		advanced: {
@@ -382,7 +397,7 @@ const getAuthConfig = () => {
 			admin(),
 			passkey(),
 			genericOAuth({ config: authConfigs }),
-			twoFactor({ issuer: "Reactive Resume" }),
+			twoFactor({ issuer: "ResumeHub.in" }),
 			apiKey({
 				enableSessionForAPIKeys: true,
 				rateLimit: {

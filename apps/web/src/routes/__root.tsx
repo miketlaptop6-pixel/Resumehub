@@ -17,7 +17,6 @@ import { DirectionProvider } from "@reactive-resume/ui/components/direction";
 import { Toaster } from "@reactive-resume/ui/components/sonner";
 import { TooltipProvider } from "@reactive-resume/ui/components/tooltip";
 import { BreakpointIndicator } from "@/components/layout/breakpoint-indicator";
-import { DonationToast } from "@/components/ui/donation-toast";
 import { DialogManager } from "@/dialogs/manager";
 import { CommandPalette } from "@/features/command-palette";
 import { ThemeProvider } from "@/features/theme/provider";
@@ -37,16 +36,16 @@ type RouterContext = {
 	flags: FeatureFlags;
 };
 
-const appName = "Reactive Resume";
+const appName = "ResumeHub.in";
 const tagline = "A free and open-source resume builder";
 const title = `${appName} — ${tagline}`;
 const description =
-	"Reactive Resume is a free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.";
+	"ResumeHub.in is a free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
 	component: RootComponent,
 	head: () => {
-		const appUrl = typeof window !== "undefined" ? window.location.origin : "https://rxresu.me";
+		const appUrl = typeof window !== "undefined" ? window.location.origin : "https://resumehub.in";
 
 		return {
 			links: [
@@ -64,10 +63,10 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				{ name: "viewport", content: "width=device-width, initial-scale=1" },
 				// Meta Tags
 				{ name: "theme-color", content: "#09090B" },
-				{ name: "application-name", content: "Reactive Resume" },
+				{ name: "application-name", content: "ResumeHub.in" },
 				{ name: "mobile-web-app-capable", content: "yes" },
 				{ name: "apple-mobile-web-app-capable", content: "yes" },
-				{ name: "apple-mobile-web-app-title", content: "Reactive Resume" },
+				{ name: "apple-mobile-web-app-title", content: "ResumeHub.in" },
 				{ name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
 				// Twitter Tags
 				{ property: "twitter:image", content: `${appUrl}/opengraph/banner.jpg` },
@@ -126,7 +125,6 @@ function RootComponent() {
 													<PromptDialogProvider>
 														<Outlet />
 
-														<DonationToast />
 														<DialogManager />
 														<CommandPalette />
 														<Toaster richColors position="bottom-right" />

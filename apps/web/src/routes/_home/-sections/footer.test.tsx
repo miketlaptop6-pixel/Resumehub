@@ -52,7 +52,7 @@ describe("Footer", () => {
 		expect(hrefs.some((h) => h.includes("x.com/KingOKings"))).toBe(true);
 	});
 
-	it("includes Reactive Resume version copy via Copyright", () => {
+	it("includes ResumeHub.in version copy via Copyright", () => {
 		renderFooter();
 		expect(screen.getByText(/v9\.9\.9/)).toBeInTheDocument();
 	});

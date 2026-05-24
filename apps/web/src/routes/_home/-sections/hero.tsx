@@ -29,7 +29,7 @@ export function Hero() {
 						autoPlay
 						playsInline
 						src="/videos/timelapse.mp4"
-						aria-label={t`Timelapse demonstration of building a resume with Reactive Resume`}
+						aria-label={t`Timelapse demonstration of building a resume with ResumeHub.in`}
 						className="pointer-events-none size-full rounded-md border object-cover"
 					/>
 
@@ -51,7 +51,7 @@ export function Hero() {
 					whileTap={{ scale: 0.985 }}
 					target="_blank"
 					rel="noopener noreferrer"
-					href="https://docs.rxresu.me/getting-started"
+					href="https://docs.resumehub.in/getting-started"
 				>
 					<Badge variant="secondary" className="h-auto gap-1.5 px-3 py-0.5">
 						<SparkleIcon aria-hidden="true" className="size-3.5" weight="fill" />
@@ -82,7 +82,7 @@ export function Hero() {
 					transition={{ duration: 0.45, delay: 0.82 }}
 				>
 					<Trans>
-						Reactive Resume is a free and open-source resume builder that simplifies the process of creating, updating,
+						ResumeHub.in is a free and open-source resume builder that simplifies the process of creating, updating,
 						and sharing your resume.
 					</Trans>
 				</m.p>
@@ -117,7 +117,7 @@ export function Hero() {
 						className="gap-2 px-4"
 						nativeButton={false}
 						render={
-							<a href="https://docs.rxresu.me" target="_blank" rel="noopener noreferrer">
+							<a href="https://docs.resumehub.in" target="_blank" rel="noopener noreferrer">
 								<BookIcon aria-hidden="true" className="size-4" />
 								<Trans>Learn More</Trans>
 								<span className="sr-only">

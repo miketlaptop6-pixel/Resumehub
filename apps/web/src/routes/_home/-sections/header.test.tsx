@@ -38,7 +38,7 @@ describe("Header", () => {
 		const { container } = renderHeader();
 		const home = Array.from(container.querySelectorAll("a")).find((a) => a.getAttribute("href") === "/");
 		expect(home).toBeDefined();
-		expect(home?.getAttribute("aria-label")).toBe("Reactive Resume - Go to homepage");
+		expect(home?.getAttribute("aria-label")).toBe("ResumeHub.in - Go to homepage");
 	});
 
 	it("renders a dashboard link with the documented aria-label", () => {

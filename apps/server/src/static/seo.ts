@@ -1,6 +1,6 @@
 import { env } from "@reactive-resume/env/server";
 
-const DOCS_URL = "https://docs.rxresu.me";
+const DOCS_URL = "https://docs.resumehub.in";
 
 type StaticSeoOptions = {
 	head?: boolean;
@@ -54,9 +54,9 @@ export function handleSitemap(options?: StaticSeoOptions) {
 export function handleLlms(options?: StaticSeoOptions) {
 	const baseUrl = appUrl();
 	const body = [
-		"# Reactive Resume",
+		"# ResumeHub.in",
 		"",
-		"Reactive Resume is an open-source resume builder for creating, managing, and exporting resumes.",
+		"ResumeHub.in is an open-source resume builder for creating, managing, and exporting resumes.",
 		"",
 		"## Links",
 		"",

@@ -1,6 +1,6 @@
 {
-	"name": "reactive-resume",
-	"description": "Reactive Resume is a free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.",
+	"name": "resumehub",
+	"description": "ResumeHub.in is a free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.",
 	"version": "5.1.5",
 	"private": true,
 	"license": "MIT",
