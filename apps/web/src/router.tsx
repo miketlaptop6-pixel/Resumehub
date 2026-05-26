@@ -15,8 +15,14 @@ export const getRouter = async () => {
 	const [theme, locale, session, flags] = await Promise.all([
 		getTheme(),
 		getLocale(),
-		getSession(),
-		client.flags.get(),
+		getSession().catch(() => null),
+		client.flags.get().catch(() => ({
+			disableSignups: false,
+			disableEmailAuth: false,
+			maxFreeResumes: 3,
+			maxFreeAiRequestsPerDay: 5,
+			proTemplates: [] as string[],
+		})),
 	]);
 
 	await loadLocale(locale);

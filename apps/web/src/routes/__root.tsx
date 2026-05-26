@@ -83,12 +83,28 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 		};
 	},
 	beforeLoad: async () => {
-		const [theme, locale, session, flags] = await Promise.all([
-			getTheme(),
-			getLocale(),
-			getSession(),
-			client.flags.get(),
-		]);
+		let session: Awaited<ReturnType<typeof getSession>> = null;
+		let flags: FeatureFlags = {
+			disableSignups: false,
+			disableEmailAuth: false,
+			maxFreeResumes: 3,
+			maxFreeAiRequestsPerDay: 5,
+			proTemplates: [],
+		};
+
+		const [theme, locale] = await Promise.all([getTheme(), getLocale()]);
+
+		try {
+			session = await getSession();
+		} catch {
+			// Backend unavailable — continue without session
+		}
+
+		try {
+			flags = await client.flags.get();
+		} catch {
+			// Backend unavailable — use defaults
+		}
 
 		await loadLocale(locale);
 

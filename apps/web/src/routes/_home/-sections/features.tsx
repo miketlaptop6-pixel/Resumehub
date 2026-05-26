@@ -1,202 +1,161 @@
-import type { Icon } from "@phosphor-icons/react";
-import { t } from "@lingui/core/macro";
-import { Trans } from "@lingui/react/macro";
-import {
-	CloudArrowUpIcon,
-	CodeSimpleIcon,
-	CurrencyDollarIcon,
-	DatabaseIcon,
-	DotsThreeIcon,
-	FilePdfIcon,
-	FilesIcon,
-	GithubLogoIcon,
-	GlobeIcon,
-	KeyIcon,
-	LayoutIcon,
-	LockSimpleIcon,
-	PaletteIcon,
-	ProhibitIcon,
-	ShieldCheckIcon,
-	TranslateIcon,
-} from "@phosphor-icons/react";
 import { m } from "motion/react";
-import { useMemo } from "react";
-import { cn } from "@reactive-resume/utils/style";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-type Feature = {
-	id: string;
-	icon: Icon;
-	title: string;
-	description: string;
-};
-
-type FeatureCardProps = Feature;
-
-const getFeatures = (): Feature[] => [
+const features = [
 	{
-		id: "free",
-		icon: CurrencyDollarIcon,
-		title: t`Free`,
-		description: t`Completely free, forever, no hidden costs.`,
+		n: "01",
+		title: "AI Writing Assistant",
+		desc: "Paste your job title and years of experience. Our model generates achievement-driven bullet points that read like a senior recruiter wrote them — because it learned from millions that got people hired.",
 	},
 	{
-		id: "open-source",
-		icon: GithubLogoIcon,
-		title: t`Open Source`,
-		description: t`By the community, for the community.`,
+		n: "02",
+		title: "Real-Time ATS Scorer",
+		desc: "Every major ATS parses your resume differently. We test yours against Workday, Greenhouse, Lever, and Taleo simultaneously and surface the exact changes that lift your score above the threshold.",
 	},
 	{
-		id: "no-ads",
-		icon: ProhibitIcon,
-		title: t`No Advertising, No Tracking`,
-		description: t`For a secure and distraction-free experience.`,
+		n: "03",
+		title: "200+ Expert Templates",
+		desc: "Designed with typographers, tested by ex-recruiters at Google, McKinsey, and Goldman Sachs. Every template is ATS-safe, PDF-perfect, and available in light and dark variants.",
 	},
 	{
-		id: "instant-generation",
-		icon: FilePdfIcon,
-		title: t`Instant Generation`,
-		description: t`Export your resume to PDF instantly, without any waiting or delays.`,
+		n: "04",
+		title: "LinkedIn Import",
+		desc: "Authorize once and your entire work history, education, and skills populate automatically. Restructured, de-jargoned, and ready to edit in under 60 seconds.",
 	},
 	{
-		id: "data-security",
-		icon: DatabaseIcon,
-		title: t`Data Security`,
-		description: t`Your data is secure, and never shared or sold to anyone.`,
+		n: "05",
+		title: "Cover Letter Builder",
+		desc: "One click converts your resume into a tailored cover letter for any job description. The AI matches tone and language to the company culture so it never reads as copy-paste.",
 	},
 	{
-		id: "self-host",
-		icon: CloudArrowUpIcon,
-		title: t`Self-Host with Docker`,
-		description: t`You also have the option to deploy on your own servers using the Docker image.`,
-	},
-	{
-		id: "languages",
-		icon: TranslateIcon,
-		title: t`Multilingual`,
-		description: t`Available in multiple languages. If you would like to contribute, check out Crowdin.`,
-	},
-	{
-		id: "auth",
-		icon: KeyIcon,
-		title: t`One-Click Sign-In`,
-		description: t`Sign in with GitHub, Google or a custom OAuth provider.`,
-	},
-	{
-		id: "2fa",
-		icon: ShieldCheckIcon,
-		title: t`Passkeys & 2FA`,
-		description: t`Enhance the security of your account with additional layers of protection.`,
-	},
-	{
-		id: "unlimited-resumes",
-		icon: FilesIcon,
-		title: t`Unlimited Resumes`,
-		description: t`Create as many resumes as you want, without limits.`,
-	},
-	{
-		id: "design",
-		icon: PaletteIcon,
-		title: t`Flexibility`,
-		description: t`Personalize your resume with any colors, fonts or designs, and make it your own.`,
-	},
-	{
-		id: "templates",
-		icon: LayoutIcon,
-		title: t`12+ Templates`,
-		description: t`Beautiful templates to choose from, with more on the way.`,
-	},
-	{
-		id: "public",
-		icon: GlobeIcon,
-		title: t`Shareable Links`,
-		description: t`Share your resume with a public URL, and let others view it.`,
-	},
-	{
-		id: "password-protection",
-		icon: LockSimpleIcon,
-		title: t`Password Protection`,
-		description: t`Protect your resume with a password, and let only people with the password view it.`,
-	},
-	{
-		id: "api-access",
-		icon: CodeSimpleIcon,
-		title: t`API Access`,
-		description: t`Access your resumes and data programmatically using the API.`,
-	},
-	{
-		id: "more",
-		icon: DotsThreeIcon,
-		title: t`And many more...`,
-		description: t`New features are constantly being added and improved, so be sure to check back often.`,
+		n: "06",
+		title: "Live Preview & Export",
+		desc: "Every keystroke updates the formatted document in real time. When you're done: PDF, Word, or a shareable link — formatted identically across all three.",
 	},
 ];
 
-function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
+function FeatureRow({ n, title, desc, index }: (typeof features)[0] & { index: number }) {
+	const { ref, isInView } = useScrollReveal<HTMLDivElement>({ threshold: 0.1, once: true });
+
 	return (
 		<m.div
-			className={cn(
-				"group relative flex min-h-48 flex-col gap-4 overflow-hidden border-b bg-background p-6 transition-[background-color] duration-300 will-change-[transform,opacity]",
-				"not-nth-[2n]:border-r xl:not-nth-[4n]:border-r",
-				"hover:bg-secondary/30",
-			)}
-			initial={{ opacity: 0, y: 16 }}
-			whileInView={{ opacity: 1, y: 0 }}
-			viewport={{ once: true, amount: 0.1 }}
-			transition={{ duration: 0.35, ease: "easeOut" }}
+			ref={ref}
+			className="grid gap-4 border-lp-surface-border border-b py-8 last:border-b-0 sm:grid-cols-[80px_1fr] sm:gap-8"
+			animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+			transition={{ duration: 0.45, delay: index * 0.06, ease: "easeOut" }}
+			initial={{ opacity: 0, y: 24 }}
 		>
-			{/* Hover gradient overlay */}
-			<div
-				aria-hidden="true"
-				className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-			/>
-
-			{/* Icon */}
-			<div aria-hidden="true" className="relative">
-				<div className="inline-flex rounded-md bg-primary/5 p-2.5 text-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
-					<Icon size={24} weight="thin" />
-				</div>
-			</div>
-
-			{/* Content */}
-			<div className="relative flex flex-col gap-y-1.5">
-				<h3 className="font-semibold text-base tracking-tight transition-colors group-hover:text-primary">{title}</h3>
-				<p className="text-muted-foreground text-sm leading-relaxed">{description}</p>
+			<div className="pt-0.5 font-mono text-lp-wire-300 text-sm">{n}</div>
+			<div className="grid gap-4 sm:grid-cols-[1fr_2fr] sm:gap-12">
+				<h3 className="font-display font-semibold text-base text-lp-ink-900 leading-snug">{title}</h3>
+				<p className="text-lp-ink-600 text-sm leading-relaxed">{desc}</p>
 			</div>
 		</m.div>
 	);
 }
 
 export function Features() {
-	const features = useMemo(() => getFeatures(), []);
+	const { ref: headerRef, isInView: headerInView } = useScrollReveal<HTMLDivElement>({
+		threshold: 0.1,
+		once: true,
+	});
+
+	const { ref: demoRef, isInView: demoInView } = useScrollReveal<HTMLDivElement>({
+		threshold: 0.1,
+		once: true,
+	});
 
 	return (
-		<section id="features">
-			{/* Header */}
+		<section id="features" className="border-lp-surface-border border-b bg-lp-surface-base">
+			{/* Section header */}
 			<m.div
-				className="space-y-4 p-4 will-change-[transform,opacity] md:p-8 xl:py-16"
+				ref={headerRef}
+				className="mx-auto grid max-w-7xl items-end gap-8 px-5 pt-20 pb-10 sm:grid-cols-2 sm:px-8"
+				animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+				transition={{ duration: 0.45, ease: "easeOut" }}
 				initial={{ opacity: 0, y: 20 }}
-				whileInView={{ opacity: 1, y: 0 }}
-				viewport={{ once: true }}
-				transition={{ duration: 0.45 }}
 			>
-				<h2 className="font-semibold text-2xl tracking-tight md:text-4xl xl:text-5xl">
-					<Trans>Features</Trans>
-				</h2>
-
-				<p className="max-w-2xl text-muted-foreground leading-relaxed">
-					<Trans>
-						Everything you need to create, customize, and share professional resumes. Built with privacy in mind,
-						powered by open source, and completely free forever.
-					</Trans>
+				<div>
+					<p className="section-label mb-4">What's inside</p>
+					<h2
+						className="font-bold font-display text-3xl text-lp-ink-900 tracking-tight sm:text-4xl lg:text-5xl"
+						style={{ letterSpacing: "-0.02em" }}
+					>
+						Every tool a
+						<br />
+						serious job seeker needs.
+					</h2>
+				</div>
+				<p className="text-base text-lp-ink-500 leading-relaxed sm:ml-auto sm:max-w-xs sm:text-right">
+					Built by people who've sat on both sides of the hiring table. No filler features, no fluff.
 				</p>
 			</m.div>
 
-			{/* Features Grid */}
-			<div className="grid grid-cols-1 xs:grid-cols-2 border-t xl:grid-cols-4">
-				{features.map((feature) => (
-					<FeatureCard key={feature.id} {...feature} />
+			{/* Feature list */}
+			<div className="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
+				{features.map((f, i) => (
+					<FeatureRow key={f.n} {...f} index={i} />
 				))}
 			</div>
+
+			{/* AI before/after — full-width band */}
+			<m.div
+				ref={demoRef}
+				className="grid border-lp-surface-border border-t lg:grid-cols-2"
+				animate={demoInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+				transition={{ duration: 0.5, ease: "easeOut" }}
+				initial={{ opacity: 0, y: 20 }}
+			>
+				{/* Left side — copy + CTA */}
+				<div className="border-lp-surface-border border-b px-8 py-14 sm:px-12 lg:border-r lg:border-b-0">
+					<p className="section-label mb-5">AI in action</p>
+					<h3
+						className="mb-4 font-bold font-display text-2xl text-lp-ink-900 leading-tight sm:text-3xl"
+						style={{ letterSpacing: "-0.02em" }}
+					>
+						From vague to remarkable
+						<br />
+						in one click.
+					</h3>
+					<p className="mb-8 max-w-sm text-lp-ink-500 text-sm leading-relaxed">
+						The difference between getting screened out and getting called back is often a single well-written line. Our
+						AI finds that line every time.
+					</p>
+					<a
+						href="/dashboard"
+						className="inline-flex items-center justify-center rounded-lg bg-lp-signal-500 px-6 py-3 font-semibold text-sm text-white transition-colors hover:bg-lp-signal-600"
+					>
+						Try AI Writing Free
+					</a>
+				</div>
+
+				{/* Right side — dark contrast panel */}
+				<div className="flex flex-col justify-center space-y-4 bg-lp-surface-dark px-8 py-14 sm:px-12">
+					{/* Before card */}
+					<div className="rounded border border-lp-ink-700 p-5">
+						<p className="mb-2 font-mono text-[10px] text-lp-wire-400 uppercase tracking-widest">Before</p>
+						<p className="text-lp-wire-400 text-sm italic leading-relaxed">
+							"Worked on backend systems and helped with database stuff."
+						</p>
+					</div>
+
+					{/* Arrow divider */}
+					<div className="flex items-center gap-3">
+						<div className="h-px flex-1 bg-lp-ink-700" />
+						<span className="font-mono text-lp-signal-400 text-xs">AI →</span>
+						<div className="h-px flex-1 bg-lp-ink-700" />
+					</div>
+
+					{/* After card */}
+					<div className="rounded border border-lp-signal-500/30 bg-lp-signal-500/10 p-5">
+						<p className="mb-2 font-mono text-[10px] text-lp-signal-400 uppercase tracking-widest">After</p>
+						<p className="text-lp-wire-200 text-sm leading-relaxed">
+							"Architected PostgreSQL schemas handling 2M+ daily active users, reducing average query latency by 67%
+							through strategic indexing and query optimization."
+						</p>
+					</div>
+				</div>
+			</m.div>
 		</section>
 	);
 }

@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 @import "@phosphor-icons/web/regular/style.css";
 
 @plugin "@tailwindcss/typography";
@@ -14,6 +17,45 @@
 :root {
 	--radius: 0.3rem;
 	--font-body: "IBM Plex Sans Variable", sans-serif;
+
+	/* Landing Page Design System */
+
+	/* Surface palette */
+	--lp-surface-base: #FAFAF8;
+	--lp-surface-paper: #FFFFFF;
+	--lp-surface-muted: #F5F4F1;
+	--lp-surface-border: #E2E1DC;
+	--lp-surface-dark: #1A1A1A;
+
+	/* Ink palette */
+	--lp-ink-950: #0F0F0F;
+	--lp-ink-900: #1A1A1A;
+	--lp-ink-800: #2A2A2A;
+	--lp-ink-700: #3A3A3A;
+	--lp-ink-600: #525252;
+	--lp-ink-500: #6B6B6B;
+
+	/* Wire palette */
+	--lp-wire-600: #6B6B6B;
+	--lp-wire-500: #8A8A8A;
+	--lp-wire-400: #ADADAD;
+	--lp-wire-300: #C8C8C8;
+	--lp-wire-200: #E2E1DC;
+	--lp-wire-100: #F0EFE9;
+
+	/* Signal palette (green accent) */
+	--lp-signal-700: #166534;
+	--lp-signal-600: #15803D;
+	--lp-signal-500: #16A34A;
+	--lp-signal-400: #22C55E;
+	--lp-signal-300: #4ADE80;
+	--lp-signal-100: #DCFCE7;
+	--lp-signal-50: #F0FDF4;
+
+	/* Landing page font families */
+	--font-display: "Plus Jakarta Sans Variable", "Inter Variable", sans-serif;
+	--font-body-lp: "Inter Variable", system-ui, sans-serif;
+	--font-mono-lp: "JetBrains Mono Variable", monospace;
 
 	--accent-foreground: oklch(0.205 0 0);
 	--accent: oklch(0.97 0 0);
@@ -124,6 +166,46 @@
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-ring: var(--sidebar-ring);
+
+	/* Landing Page Design System — Colors */
+	--color-lp-surface-base: var(--lp-surface-base);
+	--color-lp-surface-paper: var(--lp-surface-paper);
+	--color-lp-surface-muted: var(--lp-surface-muted);
+	--color-lp-surface-border: var(--lp-surface-border);
+	--color-lp-surface-dark: var(--lp-surface-dark);
+
+	--color-lp-ink-950: var(--lp-ink-950);
+	--color-lp-ink-900: var(--lp-ink-900);
+	--color-lp-ink-800: var(--lp-ink-800);
+	--color-lp-ink-700: var(--lp-ink-700);
+	--color-lp-ink-600: var(--lp-ink-600);
+	--color-lp-ink-500: var(--lp-ink-500);
+
+	--color-lp-wire-600: var(--lp-wire-600);
+	--color-lp-wire-500: var(--lp-wire-500);
+	--color-lp-wire-400: var(--lp-wire-400);
+	--color-lp-wire-300: var(--lp-wire-300);
+	--color-lp-wire-200: var(--lp-wire-200);
+	--color-lp-wire-100: var(--lp-wire-100);
+
+	--color-lp-signal-700: var(--lp-signal-700);
+	--color-lp-signal-600: var(--lp-signal-600);
+	--color-lp-signal-500: var(--lp-signal-500);
+	--color-lp-signal-400: var(--lp-signal-400);
+	--color-lp-signal-300: var(--lp-signal-300);
+	--color-lp-signal-100: var(--lp-signal-100);
+	--color-lp-signal-50: var(--lp-signal-50);
+
+	/* Landing Page Design System — Fonts */
+	--font-display: "Plus Jakarta Sans Variable", "Inter Variable", sans-serif;
+	--font-body-lp: "Inter Variable", system-ui, sans-serif;
+	--font-mono-lp: "JetBrains Mono Variable", monospace;
+
+	/* Landing Page Design System — Animations */
+	--animate-fade-up: fade-up 0.5s ease-out forwards;
+	--animate-fade-in: fade-in 0.4s ease-out forwards;
+	--animate-marquee: marquee 40s linear infinite;
+	--animate-bar-fill: bar-fill 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @layer base {
@@ -156,6 +238,67 @@
 	.wysiwyg {
 		@apply prose prose-sm prose-zinc dark:prose-invert max-w-none prose-p:my-3! prose-li:my-3! prose-ul:my-3! prose-ol:my-3!;
 	}
+}
+
+/* Landing Page Design System — Keyframes */
+
+@keyframes fade-up {
+	0% {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes marquee {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+@keyframes bar-fill {
+	0% {
+		width: 0%;
+	}
+	100% {
+		width: var(--bar-width);
+	}
+}
+
+/* Landing Page Design System — Utility Classes */
+
+.section-label {
+	font-family: var(--font-mono-lp);
+	font-size: 0.75rem;
+	line-height: 1rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--lp-signal-600);
+}
+
+.section-title {
+	font-family: var(--font-display);
+	font-weight: 700;
+	line-height: 1.1;
+	letter-spacing: -0.025em;
+	color: var(--lp-ink-900);
+	font-size: clamp(1.875rem, 4vw, 3rem);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -16,6 +16,7 @@ import { Route as HomeRouteRouteImport } from "./routes/_home/route";
 import { Route as DashboardIndexRouteImport } from "./routes/dashboard/index";
 import { Route as AuthIndexRouteImport } from "./routes/auth/index";
 import { Route as AgentIndexRouteImport } from "./routes/agent/index";
+import { Route as AdminIndexRouteImport } from "./routes/admin/index";
 import { Route as HomeIndexRouteImport } from "./routes/_home/index";
 import { Route as TemplatesSplatRouteImport } from "./routes/templates/$";
 import { Route as AuthVerify2faBackupRouteImport } from "./routes/auth/verify-2fa-backup";
@@ -31,6 +32,9 @@ import { Route as UsernameSlugRouteImport } from "./routes/$username/$slug";
 import { Route as BuilderResumeIdRouteRouteImport } from "./routes/builder/$resumeId/route";
 import { Route as DashboardResumesIndexRouteImport } from "./routes/dashboard/resumes/index";
 import { Route as BuilderResumeIdIndexRouteImport } from "./routes/builder/$resumeId/index";
+import { Route as HomeTemplatesIndexRouteImport } from "./routes/_home/templates/index";
+import { Route as HomeResumeExamplesIndexRouteImport } from "./routes/_home/resume-examples/index";
+import { Route as HomeBlogIndexRouteImport } from "./routes/_home/blog/index";
 import { Route as DashboardSettingsProfileRouteImport } from "./routes/dashboard/settings/profile";
 import { Route as DashboardSettingsPreferencesRouteImport } from "./routes/dashboard/settings/preferences";
 import { Route as DashboardSettingsJobSearchRouteImport } from "./routes/dashboard/settings/job-search";
@@ -72,6 +76,11 @@ const AgentIndexRoute = AgentIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => AgentRouteRoute,
+} as any);
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: "/admin/",
+  path: "/admin/",
+  getParentRoute: () => rootRouteImport,
 } as any);
 const HomeIndexRoute = HomeIndexRouteImport.update({
   id: "/",
@@ -148,6 +157,21 @@ const BuilderResumeIdIndexRoute = BuilderResumeIdIndexRouteImport.update({
   path: "/",
   getParentRoute: () => BuilderResumeIdRouteRoute,
 } as any);
+const HomeTemplatesIndexRoute = HomeTemplatesIndexRouteImport.update({
+  id: "/templates/",
+  path: "/templates/",
+  getParentRoute: () => HomeRouteRoute,
+} as any);
+const HomeResumeExamplesIndexRoute = HomeResumeExamplesIndexRouteImport.update({
+  id: "/resume-examples/",
+  path: "/resume-examples/",
+  getParentRoute: () => HomeRouteRoute,
+} as any);
+const HomeBlogIndexRoute = HomeBlogIndexRouteImport.update({
+  id: "/blog/",
+  path: "/blog/",
+  getParentRoute: () => HomeRouteRoute,
+} as any);
 const DashboardSettingsProfileRoute =
   DashboardSettingsProfileRouteImport.update({
     id: "/settings/profile",
@@ -208,6 +232,7 @@ export interface FileRoutesByFullPath {
   "/auth/verify-2fa": typeof AuthVerify2faRoute;
   "/auth/verify-2fa-backup": typeof AuthVerify2faBackupRoute;
   "/templates/$": typeof TemplatesSplatRoute;
+  "/admin/": typeof AdminIndexRoute;
   "/agent/": typeof AgentIndexRoute;
   "/auth/": typeof AuthIndexRoute;
   "/dashboard/": typeof DashboardIndexRoute;
@@ -217,6 +242,9 @@ export interface FileRoutesByFullPath {
   "/dashboard/settings/job-search": typeof DashboardSettingsJobSearchRoute;
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
+  "/blog/": typeof HomeBlogIndexRoute;
+  "/resume-examples/": typeof HomeResumeExamplesIndexRoute;
+  "/templates/": typeof HomeTemplatesIndexRoute;
   "/builder/$resumeId/": typeof BuilderResumeIdIndexRoute;
   "/dashboard/resumes/": typeof DashboardResumesIndexRoute;
   "/dashboard/settings/authentication/": typeof DashboardSettingsAuthenticationIndexRoute;
@@ -234,6 +262,7 @@ export interface FileRoutesByTo {
   "/auth/verify-2fa-backup": typeof AuthVerify2faBackupRoute;
   "/templates/$": typeof TemplatesSplatRoute;
   "/": typeof HomeIndexRoute;
+  "/admin": typeof AdminIndexRoute;
   "/agent": typeof AgentIndexRoute;
   "/auth": typeof AuthIndexRoute;
   "/dashboard": typeof DashboardIndexRoute;
@@ -243,6 +272,9 @@ export interface FileRoutesByTo {
   "/dashboard/settings/job-search": typeof DashboardSettingsJobSearchRoute;
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
+  "/blog": typeof HomeBlogIndexRoute;
+  "/resume-examples": typeof HomeResumeExamplesIndexRoute;
+  "/templates": typeof HomeTemplatesIndexRoute;
   "/builder/$resumeId": typeof BuilderResumeIdIndexRoute;
   "/dashboard/resumes": typeof DashboardResumesIndexRoute;
   "/dashboard/settings/authentication": typeof DashboardSettingsAuthenticationIndexRoute;
@@ -266,6 +298,7 @@ export interface FileRoutesById {
   "/auth/verify-2fa-backup": typeof AuthVerify2faBackupRoute;
   "/templates/$": typeof TemplatesSplatRoute;
   "/_home/": typeof HomeIndexRoute;
+  "/admin/": typeof AdminIndexRoute;
   "/agent/": typeof AgentIndexRoute;
   "/auth/": typeof AuthIndexRoute;
   "/dashboard/": typeof DashboardIndexRoute;
@@ -275,6 +308,9 @@ export interface FileRoutesById {
   "/dashboard/settings/job-search": typeof DashboardSettingsJobSearchRoute;
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
+  "/_home/blog/": typeof HomeBlogIndexRoute;
+  "/_home/resume-examples/": typeof HomeResumeExamplesIndexRoute;
+  "/_home/templates/": typeof HomeTemplatesIndexRoute;
   "/builder/$resumeId/": typeof BuilderResumeIdIndexRoute;
   "/dashboard/resumes/": typeof DashboardResumesIndexRoute;
   "/dashboard/settings/authentication/": typeof DashboardSettingsAuthenticationIndexRoute;
@@ -298,6 +334,7 @@ export interface FileRouteTypes {
     | "/auth/verify-2fa"
     | "/auth/verify-2fa-backup"
     | "/templates/$"
+    | "/admin/"
     | "/agent/"
     | "/auth/"
     | "/dashboard/"
@@ -307,6 +344,9 @@ export interface FileRouteTypes {
     | "/dashboard/settings/job-search"
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
+    | "/blog/"
+    | "/resume-examples/"
+    | "/templates/"
     | "/builder/$resumeId/"
     | "/dashboard/resumes/"
     | "/dashboard/settings/authentication/";
@@ -324,6 +364,7 @@ export interface FileRouteTypes {
     | "/auth/verify-2fa-backup"
     | "/templates/$"
     | "/"
+    | "/admin"
     | "/agent"
     | "/auth"
     | "/dashboard"
@@ -333,6 +374,9 @@ export interface FileRouteTypes {
     | "/dashboard/settings/job-search"
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
+    | "/blog"
+    | "/resume-examples"
+    | "/templates"
     | "/builder/$resumeId"
     | "/dashboard/resumes"
     | "/dashboard/settings/authentication";
@@ -355,6 +399,7 @@ export interface FileRouteTypes {
     | "/auth/verify-2fa-backup"
     | "/templates/$"
     | "/_home/"
+    | "/admin/"
     | "/agent/"
     | "/auth/"
     | "/dashboard/"
@@ -364,6 +409,9 @@ export interface FileRouteTypes {
     | "/dashboard/settings/job-search"
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
+    | "/_home/blog/"
+    | "/_home/resume-examples/"
+    | "/_home/templates/"
     | "/builder/$resumeId/"
     | "/dashboard/resumes/"
     | "/dashboard/settings/authentication/";
@@ -377,6 +425,7 @@ export interface RootRouteChildren {
   BuilderResumeIdRouteRoute: typeof BuilderResumeIdRouteRouteWithChildren;
   UsernameSlugRoute: typeof UsernameSlugRoute;
   TemplatesSplatRoute: typeof TemplatesSplatRoute;
+  AdminIndexRoute: typeof AdminIndexRoute;
 }
 
 declare module "@tanstack/react-router" {
@@ -429,6 +478,13 @@ declare module "@tanstack/react-router" {
       fullPath: "/agent/";
       preLoaderRoute: typeof AgentIndexRouteImport;
       parentRoute: typeof AgentRouteRoute;
+    };
+    "/admin/": {
+      id: "/admin/";
+      path: "/admin";
+      fullPath: "/admin/";
+      preLoaderRoute: typeof AdminIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
     };
     "/_home/": {
       id: "/_home/";
@@ -535,6 +591,27 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof BuilderResumeIdIndexRouteImport;
       parentRoute: typeof BuilderResumeIdRouteRoute;
     };
+    "/_home/templates/": {
+      id: "/_home/templates/";
+      path: "/templates";
+      fullPath: "/templates/";
+      preLoaderRoute: typeof HomeTemplatesIndexRouteImport;
+      parentRoute: typeof HomeRouteRoute;
+    };
+    "/_home/resume-examples/": {
+      id: "/_home/resume-examples/";
+      path: "/resume-examples";
+      fullPath: "/resume-examples/";
+      preLoaderRoute: typeof HomeResumeExamplesIndexRouteImport;
+      parentRoute: typeof HomeRouteRoute;
+    };
+    "/_home/blog/": {
+      id: "/_home/blog/";
+      path: "/blog";
+      fullPath: "/blog/";
+      preLoaderRoute: typeof HomeBlogIndexRouteImport;
+      parentRoute: typeof HomeRouteRoute;
+    };
     "/dashboard/settings/profile": {
       id: "/dashboard/settings/profile";
       path: "/settings/profile";
@@ -589,10 +666,16 @@ declare module "@tanstack/react-router" {
 
 interface HomeRouteRouteChildren {
   HomeIndexRoute: typeof HomeIndexRoute;
+  HomeBlogIndexRoute: typeof HomeBlogIndexRoute;
+  HomeResumeExamplesIndexRoute: typeof HomeResumeExamplesIndexRoute;
+  HomeTemplatesIndexRoute: typeof HomeTemplatesIndexRoute;
 }
 
 const HomeRouteRouteChildren: HomeRouteRouteChildren = {
   HomeIndexRoute: HomeIndexRoute,
+  HomeBlogIndexRoute: HomeBlogIndexRoute,
+  HomeResumeExamplesIndexRoute: HomeResumeExamplesIndexRoute,
+  HomeTemplatesIndexRoute: HomeTemplatesIndexRoute,
 };
 
 const HomeRouteRouteWithChildren = HomeRouteRoute._addFileChildren(
@@ -690,6 +773,7 @@ const rootRouteChildren: RootRouteChildren = {
   BuilderResumeIdRouteRoute: BuilderResumeIdRouteRouteWithChildren,
   UsernameSlugRoute: UsernameSlugRoute,
   TemplatesSplatRoute: TemplatesSplatRoute,
+  AdminIndexRoute: AdminIndexRoute,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

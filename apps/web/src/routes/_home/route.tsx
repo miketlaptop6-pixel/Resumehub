@@ -1,6 +1,6 @@
 import { Trans } from "@lingui/react/macro";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { Header } from "./-sections/header";
+import { Navbar } from "./-sections/navbar";
 
 export const Route = createFileRoute("/_home")({
 	component: RouteComponent,
@@ -16,7 +16,7 @@ function RouteComponent() {
 				<Trans>Skip to main content</Trans>
 			</a>
 
-			<Header />
+			<Navbar />
 			<Outlet />
 		</>
 	);
