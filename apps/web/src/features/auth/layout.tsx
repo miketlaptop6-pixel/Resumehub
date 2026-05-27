@@ -32,7 +32,7 @@ export function AuthLayout() {
 
 			{/* Minimal footer */}
 			<footer className="border-lp-surface-border border-t px-6 py-4 text-center text-lp-ink-500 text-xs">
-				© {new Date().getFullYear()} ResumeHub.in · Free &amp; open-source resume builder
+				© {new Date().getFullYear()} ResumeHub.in · AI-powered resume builder
 			</footer>
 		</div>
 	);

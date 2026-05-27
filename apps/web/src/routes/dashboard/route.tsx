@@ -7,7 +7,7 @@ import { DashboardSidebar } from "./-components/sidebar";
 export const Route = createFileRoute("/dashboard")({
 	component: RouteComponent,
 	beforeLoad: async ({ context }) => {
-		if (!context.session) throw redirect({ to: "/auth/login", replace: true });
+		// Auth bypass — allow access without login
 		return { session: context.session };
 	},
 	loader: async () => {

@@ -52,7 +52,7 @@ export const getRootStructuredData = (canonicalUrl: string): JsonLd[] => [
 		name: appName,
 		url: canonicalUrl,
 		description:
-			"ResumeHub.in is a free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.",
+			"ResumeHub.in is an AI-powered resume builder that simplifies the process of creating, updating, and sharing your resume.",
 		applicationCategory: "BusinessApplication",
 		operatingSystem: "Web",
 		isAccessibleForFree: true,
@@ -92,7 +92,7 @@ const homeFaqJsonLdItems = [
 	{
 		question: "Is ResumeHub.in really free?",
 		answer:
-			"Yes! ResumeHub.in is completely free to use, with no hidden costs, premium tiers, or subscription fees. It's open-source and will always remain free.",
+			"Yes! ResumeHub.in offers a generous free plan with 3 resumes, AI assistance, and PDF export. Upgrade to Pro for unlimited resumes and premium features.",
 	},
 	{
 		question: "How is my data protected?",
@@ -112,7 +112,7 @@ const homeFaqJsonLdItems = [
 	{
 		question: "What makes ResumeHub.in different from other resume builders?",
 		answer:
-			"ResumeHub.in is open-source, privacy-focused, and completely free. Unlike other resume builders, it doesn't show ads, track your data, or limit your features behind a paywall.",
+			"ResumeHub.in is AI-powered, privacy-focused, and ATS-optimized. Unlike other resume builders, it doesn't show ads or track your data, and offers real-time ATS scoring.",
 	},
 	{
 		question: "How do I share my resume?",

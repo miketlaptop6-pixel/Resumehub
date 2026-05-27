@@ -37,10 +37,10 @@ type RouterContext = {
 };
 
 const appName = "ResumeHub.in";
-const tagline = "A free and open-source resume builder";
+const tagline = "AI-powered resume builder";
 const title = `${appName} — ${tagline}`;
 const description =
-	"ResumeHub.in is a free and open-source resume builder that simplifies the process of creating, updating, and sharing your resume.";
+	"ResumeHub.in is an AI-powered resume builder that simplifies the process of creating, updating, and sharing your resume.";
 
 export const Route = createRootRouteWithContext<RouterContext>()({
 	component: RootComponent,
@@ -62,7 +62,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 				{ name: "description", content: description },
 				{ name: "viewport", content: "width=device-width, initial-scale=1" },
 				// Meta Tags
-				{ name: "theme-color", content: "#09090B" },
+				{ name: "theme-color", content: "#FAFAF8" },
 				{ name: "application-name", content: "ResumeHub.in" },
 				{ name: "mobile-web-app-capable", content: "yes" },
 				{ name: "apple-mobile-web-app-capable", content: "yes" },
