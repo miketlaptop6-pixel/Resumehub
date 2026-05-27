@@ -1,13 +1,8 @@
 import { sampleResumeData } from "@reactive-resume/schema/resume/sample";
 import { generateRandomName, slugify } from "@reactive-resume/utils/string";
-import { ORPCError } from "@orpc/client";
-import { eq, count } from "drizzle-orm";
-import { db } from "@reactive-resume/db/client";
-import * as schema from "@reactive-resume/db/schema";
 import { protectedProcedure } from "../../context";
 import { resumeDto } from "../../dto/resume";
 import { resumeMutationRateLimit } from "../../middleware/rate-limit";
-import { getUserRole } from "../../middleware/rbac";
 import { resumeService } from "./service";
 
 export const crudRouter = {
@@ -70,21 +65,6 @@ export const crudRouter = {
 			},
 		})
 		.handler(async ({ context, input }) => {
-			// RBAC: Free users limited to 3 resumes
-			const role = getUserRole(context.user);
-			if (role === "free") {
-				const [resumeCount] = await db
-					.select({ count: count() })
-					.from(schema.resume)
-					.where(eq(schema.resume.userId, context.user.id));
-
-				if (resumeCount && resumeCount.count >= 3) {
-					throw new ORPCError("FORBIDDEN", {
-						message: "Upgrade to Pro for unlimited resumes. Free users can create up to 3 resumes.",
-					});
-				}
-			}
-
 			return resumeService.create({
 				name: input.name,
 				slug: input.slug,
@@ -116,21 +96,6 @@ export const crudRouter = {
 			},
 		})
 		.handler(async ({ context, input }) => {
-			// RBAC: Free users limited to 3 resumes
-			const role = getUserRole(context.user);
-			if (role === "free") {
-				const [resumeCount] = await db
-					.select({ count: count() })
-					.from(schema.resume)
-					.where(eq(schema.resume.userId, context.user.id));
-
-				if (resumeCount && resumeCount.count >= 3) {
-					throw new ORPCError("FORBIDDEN", {
-						message: "Upgrade to Pro for unlimited resumes. Free users can create up to 3 resumes.",
-					});
-				}
-			}
-
 			const name = generateRandomName();
 			const slug = slugify(name);
 
@@ -246,21 +211,6 @@ export const crudRouter = {
 		.use(resumeMutationRateLimit)
 		.output(resumeDto.duplicate.output)
 		.handler(async ({ context, input }) => {
-			// RBAC: Free users limited to 3 resumes
-			const role = getUserRole(context.user);
-			if (role === "free") {
-				const [resumeCount] = await db
-					.select({ count: count() })
-					.from(schema.resume)
-					.where(eq(schema.resume.userId, context.user.id));
-
-				if (resumeCount && resumeCount.count >= 3) {
-					throw new ORPCError("FORBIDDEN", {
-						message: "Upgrade to Pro for unlimited resumes. Free users can create up to 3 resumes.",
-					});
-				}
-			}
-
 			const original = await resumeService.getById({ id: input.id, userId: context.user.id });
 
 			return resumeService.create({
