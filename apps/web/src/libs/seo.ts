@@ -1,6 +1,6 @@
 const productionRootUrl = "https://resumehub.in/";
 const appName = "ResumeHub.in";
-const repositoryUrl = "https://github.com/amruthpillai/reactive-resume";
+const repositoryUrl = "https://resumehub.in";
 
 type JsonLd = Record<string, unknown>;
 
@@ -59,7 +59,7 @@ export const getRootStructuredData = (canonicalUrl: string): JsonLd[] => [
 		offers: {
 			"@type": "Offer",
 			price: "0",
-			priceCurrency: "USD",
+			priceCurrency: "INR",
 		},
 		codeRepository: repositoryUrl,
 	},
@@ -97,7 +97,7 @@ const homeFaqJsonLdItems = [
 	{
 		question: "How is my data protected?",
 		answer:
-			"Your data is stored securely and is never shared with third parties. You can also self-host ResumeHub.in on your own servers for complete control over your data.",
+			"Your data is stored securely with encryption at rest and in transit. We never sell or share your data with third parties.",
 	},
 	{
 		question: "Can I export my resume to PDF?",

@@ -47,7 +47,7 @@ export async function handleOpenApi(request: Request) {
 				version: __APP_VERSION__,
 				description: "ResumeHub.in API",
 				license: { name: "MIT", url: "https://github.com/amruthpillai/reactive-resume/blob/main/LICENSE" },
-				contact: { name: "Amruth Pillai", email: "hello@amruthpillai.com", url: "https://amruthpillai.com" },
+				contact: { name: "ResumeHub.in", email: "support@resumehub.in", url: "https://resumehub.in" },
 			},
 			servers: [{ url: `${env.APP_URL}/api/openapi` }],
 			externalDocs: { url: "https://docs.resumehub.in", description: "ResumeHub.in Documentation" },

@@ -107,16 +107,16 @@ function AuthEmailLayout({ preview, heading, intro, details, actionLabel, action
 
 							<Hr className="my-10 border-zinc-700" />
 
-							<Text className="mt-8 text-xs leading-1 opacity-40">By the community, for the community.</Text>
+							<Text className="mt-8 text-xs leading-1 opacity-40">AI-powered resume builder.</Text>
 							<Text className="text-xs leading-1 opacity-40">
-								A passion project by{" "}
+								Built by{" "}
 								<Link
 									target="_blank"
 									rel="noopener noreferrer"
-									href="https://amruthpillai.com"
+									href="https://resumehub.in"
 									className="text-inherit underline underline-offset-2"
 								>
-									Amruth Pillai
+									ResumeHub.in
 								</Link>
 								.
 							</Text>

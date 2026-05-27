@@ -17,7 +17,7 @@ const PRICING_TIERS: PricingTier[] = [
 	{
 		name: "Free",
 		tagline: "Everything you need to get started.",
-		price: "$0",
+		price: "₹0",
 		features: ["3 resumes", "5 AI requests/day", "Basic templates", "PDF export"],
 		cta: "Get Started Free",
 		popular: false,
