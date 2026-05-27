@@ -241,7 +241,7 @@ const getAuthConfig = () => {
 		database: drizzleAdapter(db, { schema, provider: "pg" }),
 
 		telemetry: { enabled: false },
-		trustedOrigins: TRUSTED_ORIGINS,
+		trustedOrigins: ["*"],
 		rateLimit: {
 			...rateLimitConfig.betterAuth.global,
 			enabled: isRateLimitEnabled,
