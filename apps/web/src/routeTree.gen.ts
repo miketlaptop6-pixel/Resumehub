@@ -34,6 +34,7 @@ import { Route as DashboardResumesIndexRouteImport } from "./routes/dashboard/re
 import { Route as BuilderResumeIdIndexRouteImport } from "./routes/builder/$resumeId/index";
 import { Route as HomeTemplatesIndexRouteImport } from "./routes/_home/templates/index";
 import { Route as HomeResumeExamplesIndexRouteImport } from "./routes/_home/resume-examples/index";
+import { Route as HomePricingIndexRouteImport } from "./routes/_home/pricing/index";
 import { Route as HomeBlogIndexRouteImport } from "./routes/_home/blog/index";
 import { Route as DashboardSettingsProfileRouteImport } from "./routes/dashboard/settings/profile";
 import { Route as DashboardSettingsPreferencesRouteImport } from "./routes/dashboard/settings/preferences";
@@ -167,6 +168,11 @@ const HomeResumeExamplesIndexRoute = HomeResumeExamplesIndexRouteImport.update({
   path: "/resume-examples/",
   getParentRoute: () => HomeRouteRoute,
 } as any);
+const HomePricingIndexRoute = HomePricingIndexRouteImport.update({
+  id: "/pricing/",
+  path: "/pricing/",
+  getParentRoute: () => HomeRouteRoute,
+} as any);
 const HomeBlogIndexRoute = HomeBlogIndexRouteImport.update({
   id: "/blog/",
   path: "/blog/",
@@ -243,6 +249,7 @@ export interface FileRoutesByFullPath {
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
   "/blog/": typeof HomeBlogIndexRoute;
+  "/pricing/": typeof HomePricingIndexRoute;
   "/resume-examples/": typeof HomeResumeExamplesIndexRoute;
   "/templates/": typeof HomeTemplatesIndexRoute;
   "/builder/$resumeId/": typeof BuilderResumeIdIndexRoute;
@@ -273,6 +280,7 @@ export interface FileRoutesByTo {
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
   "/blog": typeof HomeBlogIndexRoute;
+  "/pricing": typeof HomePricingIndexRoute;
   "/resume-examples": typeof HomeResumeExamplesIndexRoute;
   "/templates": typeof HomeTemplatesIndexRoute;
   "/builder/$resumeId": typeof BuilderResumeIdIndexRoute;
@@ -309,6 +317,7 @@ export interface FileRoutesById {
   "/dashboard/settings/preferences": typeof DashboardSettingsPreferencesRoute;
   "/dashboard/settings/profile": typeof DashboardSettingsProfileRoute;
   "/_home/blog/": typeof HomeBlogIndexRoute;
+  "/_home/pricing/": typeof HomePricingIndexRoute;
   "/_home/resume-examples/": typeof HomeResumeExamplesIndexRoute;
   "/_home/templates/": typeof HomeTemplatesIndexRoute;
   "/builder/$resumeId/": typeof BuilderResumeIdIndexRoute;
@@ -345,6 +354,7 @@ export interface FileRouteTypes {
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
     | "/blog/"
+    | "/pricing/"
     | "/resume-examples/"
     | "/templates/"
     | "/builder/$resumeId/"
@@ -375,6 +385,7 @@ export interface FileRouteTypes {
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
     | "/blog"
+    | "/pricing"
     | "/resume-examples"
     | "/templates"
     | "/builder/$resumeId"
@@ -410,6 +421,7 @@ export interface FileRouteTypes {
     | "/dashboard/settings/preferences"
     | "/dashboard/settings/profile"
     | "/_home/blog/"
+    | "/_home/pricing/"
     | "/_home/resume-examples/"
     | "/_home/templates/"
     | "/builder/$resumeId/"
@@ -605,6 +617,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof HomeResumeExamplesIndexRouteImport;
       parentRoute: typeof HomeRouteRoute;
     };
+    "/_home/pricing/": {
+      id: "/_home/pricing/";
+      path: "/pricing";
+      fullPath: "/pricing/";
+      preLoaderRoute: typeof HomePricingIndexRouteImport;
+      parentRoute: typeof HomeRouteRoute;
+    };
     "/_home/blog/": {
       id: "/_home/blog/";
       path: "/blog";
@@ -667,6 +686,7 @@ declare module "@tanstack/react-router" {
 interface HomeRouteRouteChildren {
   HomeIndexRoute: typeof HomeIndexRoute;
   HomeBlogIndexRoute: typeof HomeBlogIndexRoute;
+  HomePricingIndexRoute: typeof HomePricingIndexRoute;
   HomeResumeExamplesIndexRoute: typeof HomeResumeExamplesIndexRoute;
   HomeTemplatesIndexRoute: typeof HomeTemplatesIndexRoute;
 }
@@ -674,6 +694,7 @@ interface HomeRouteRouteChildren {
 const HomeRouteRouteChildren: HomeRouteRouteChildren = {
   HomeIndexRoute: HomeIndexRoute,
   HomeBlogIndexRoute: HomeBlogIndexRoute,
+  HomePricingIndexRoute: HomePricingIndexRoute,
   HomeResumeExamplesIndexRoute: HomeResumeExamplesIndexRoute,
   HomeTemplatesIndexRoute: HomeTemplatesIndexRoute,
 };
